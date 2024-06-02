@@ -1,1 +1,14 @@
-
+.introduction {
+    padding: 2rem;
+    background-color: #f8f9fa;
+    text-align: center;
+  }
+  
+  .introduction h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .introduction p {
+    font-size: 1.1rem;
+  }
+  
