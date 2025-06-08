@@ -1,120 +1,7 @@
-<!DOCTYPE html>
-<html lang="en"> <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="origin" />
-  <title>eBuds - Wallet</title> <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet" />
-  <style>
-    /* Stilurile pentru scrollbar rămân neschimbate */
-    ::-webkit-scrollbar {
-      width: 12px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: hsl(var(--dark-bg, #030014));
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background-color: hsl(var(--neon-green, #00ff9d));
-      border-radius: 10px;
-      border: 3px solid hsl(var(--dark-bg, #030014));
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background-color: hsl(var(--highlight-color, #00ff9d));
-      filter: brightness(1.2);
-    }
-
-    html {
-      scrollbar-width: thin;
-      scrollbar-color: hsl(var(--neon-green, #00ff9d)) hsl(var(--dark-bg, #030014));
-    }
-
-    .warning-icon {
-        color: #ffcc00;
-        cursor: help;
-        font-style: normal;
-    }
-  </style>
-</head>
-<body>
-  <div class="background-overlay"></div>
-  <nav class="wallet-nav">
-    <div class="wallet-nav-container">
-        <a href="index.html" class="logo-link">
-            <img src="assets/logo.png" alt="eBuds Logo" class="nav-logo-wallet">
-        </a>
-        <div class="nav-title-group">
-            <h1 class="wallet-nav-title" data-translate-key="wallet_page_title">eBuds Wallet</h1>
-        </div>
-        <div class="nav-right-controls"> <div class="language-selector-container">
-                <select id="language-selector-wallet" aria-label="Select Language">
-                    <option value="en">EN</option>
-                    <option value="ar">AR</option> 
-                    <option value="zh">ZH</option> 
-                    <option value="de">DE</option> 
-                    <option value="es">ES</option> 
-                    <option value="fr">FR</option> 
-                    <option value="it">IT</option> 
-                    <option value="ja">JA</option> 
-                    <option value="ko">KO</option> 
-                    <option value="ro">RO</option> 
-                </select>
-            </div>
-            <button id="disconnectBtnNav" class="button-connect-wallet disconnect-button" data-translate-key="disconnect_button" style="display:none; margin-left: 10px;"></button>
-        </div>
-    </div>
-  </nav>
-
-  <div class="container-wrapper">
-    <div class="main-content-area">
-      <h1 data-translate-key="connect_info_title">Your Web3 Universe</h1>
-      <div id="connectionOptions" style="display: block;">
-        <!-- Container pentru mesaje de stare generale/de initializare -->
-        <div class="status-container" data-status-for="general"></div>
-        <div class="wallet-options-grid">
-          <div class="wallet-option">
-            <h3 data-translate-key="xportal_mobile_title">📱 xPortal (Mobile)</h3>
-            <p data-translate-key="xportal_mobile_description">Connect via the mobile application.</p>
-            <div id="qr-code-container" style="margin: 10px auto; max-width: 250px;"></div>
-            <div class="status-container" data-status-for="mobile"></div>
-            <button id="mobileBtn" class="button-connect-wallet" data-translate-key="generate_qr_button">Generate QR</button>
-          </div>
-          <div class="wallet-option" id="extensionWalletOption">
-            <h3 data-translate-key="browser_extension_title">🔌 Browser Extension</h3>
-            <p data-translate-key="browser_extension_description">Use the MultiversX browser extension.</p>
-            <div class="status-container" data-status-for="extension"></div>
-            <button id="extensionBtn" class="button-connect-wallet" data-translate-key="connect_extension_button">Connect Extension</button>
-          </div>
-        </div>
-
-        <div class="wallet-option manual-option">
-          <h3 data-translate-key="view_address_title">👁️ View Address</h3>
-          <p data-translate-key="view_address_description">Manually enter wallet address to view assets.</p>
-          <div class="manual-input">
-            <input type="text" id="manualAddressInput" placeholder="erd1qqqqqqqqqqqqqpgqq0yx7w5lguw5e5067j2lpl96t5vp3xcu27rswu3eq4" />
-            <button id="manualAddressBtn" class="button-connect-wallet" data-translate-key="check_address_button">Check Address</button>
-          </div>
-          <div class="status-container" data-status-for="manual"></div>
-        </div>
-      </div>
-
-      <div id="walletUI" style="display: none;">
-        <div class="status-container" data-status-for="wallet-load"></div>
-        <div id="walletDetails" class="wallet-info-container"></div>
-      </div>
-
-      <div class="back-link-container">
-        <a href="index.html" class="back-link" data-translate-key="back_to_main_site">← Back to Main Site</a>
-      </div>
-    </div>
-  </div>
-
-  <script type="module">
+<script type="module">
     import { ElvenJS } from 'https://unpkg.com/elven.js@0.20.0/build/elven.js';
 
+    // Obiectul cu traduceri ramane acelasi...
     const translations = {
         en: {
             wallet_page_title: "eBuds Wallet",
@@ -159,319 +46,75 @@
             hit_token_label: "HIT Token",
             bud_collection_label: "eBuds Collection",
         },
-        ar: {
-            wallet_page_title: "محفظة eBuds",
-            connect_info_title: "عالم Web3 الخاص بك",
-            xportal_mobile_title: "📱 xPortal (موبايل)",
-            xportal_mobile_description: "الاتصال عبر تطبيق الهاتف المحمول.",
-            generate_qr_button: "إنشاء رمز QR",
-            browser_extension_title: "🔌 امتداد المتصفح",
-            browser_extension_description: "استخدم امتداد متصفح MultiversX.",
-            connect_extension_button: "ربط الامتداد",
-            view_address_title: "👁️ عرض العنوان",
-            view_address_description: "أدخل عنوان المحفظة يدوياً لعرض الأصول.",
-            check_address_button: "فحص العنوان",
-            disconnect_button: "قطع الاتصال",
-            back_button: "رجوع",
-            back_to_main_site: "← العودة إلى الموقع الرئيسي",
-            wallet_info_title: "معلومات المحفظة",
-            address_label: "العنوان:",
-            egld_balance_label: "رصيد EGLD:",
-            vote_power_label: "قوة التصويت:",
-            vote_power_desc: "(بناءً على عدد NFTs eBuds المملوكة)",
-            assets_title: "الأصول في المحفظة",
-            tokens_section_title: "🪙 الرموز المميزة",
-            nfts_section_title: "🖼️ مجموعات NFT",
-            no_tokens_message: "لا تملك أي رموز مميزة (باستثناء EGLD).",
-            no_other_nfts_message: "لا تملك أي مجموعات NFT أخرى.",
-            loading_wallet_data: "جاري تحميل بيانات المحفظة...",
-            invalid_address: "عنوان محفظة غير صالح",
-            blockchain_error: "خطأ في جلب البيانات من البلوك تشين",
-            elven_init_error: "خطأ في تهيئة ElvenJS",
-            generating_qr: "جاري إنشاء رمز QR...",
-            qr_error: "خطأ في إنشاء رمز QR",
-            connecting_extension: "محاولة ربط الامتداد...",
-            extension_error: "خطأ في ربط الامتداد",
-            disconnecting: "جاري قطع الاتصال...",
-            disconnect_error: "خطأ في قطع الاتصال",
-            invalid_manual_address: "العنوان المدخل غير صالح.",
-            connecting_init: "بدء الاتصال...",
-            ebud_token_label: "رمز EBUD",
-            luv_token_label: "رمز LUV",
-            green_token_label: "رمز GREEN",
-            hit_token_label: "رمز HIT",
-            bud_collection_label: "مجموعة eBuds",
-        },
-        zh: {
-            wallet_page_title: "eBuds 钱包",
-            connect_info_title: "您的 Web3 宇宙",
-            xportal_mobile_title: "📱 xPortal (手机)",
-            xportal_mobile_description: "通过手机应用程序连接。",
-            generate_qr_button: "生成二维码",
-            browser_extension_title: "🔌 浏览器扩展",
-            browser_extension_description: "使用 MultiversX 浏览器扩展。",
-            connect_extension_button: "连接扩展",
-            view_address_title: "👁️ 查看地址",
-            view_address_description: "手动输入钱包地址以查看资产。",
-            check_address_button: "检查地址",
-            disconnect_button: "断开连接",
-            back_button: "返回",
-            back_to_main_site: "← 返回主站",
-            wallet_info_title: "钱包信息",
-            address_label: "地址：",
-            egld_balance_label: "EGLD 余额：",
-            vote_power_label: "投票权重：",
-            vote_power_desc: "（基于持有的 eBuds NFT 数量）",
-            assets_title: "钱包中的资产",
-            tokens_section_title: "🪙 代币",
-            nfts_section_title: "🖼️ NFT 收藏",
-            no_tokens_message: "您没有持有任何代币（除了 EGLD）。",
-            no_other_nfts_message: "您没有持有其他 NFT 收藏。",
-            loading_wallet_data: "正在加载钱包数据...",
-            invalid_address: "无效的钱包地址",
-            blockchain_error: "从区块链获取数据时出错",
-            elven_init_error: "初始化 ElvenJS 时出错",
-            generating_qr: "正在生成二维码...",
-            qr_error: "生成二维码时出错",
-            connecting_extension: "正在尝试连接扩展...",
-            extension_error: "连接扩展时出错",
-            disconnecting: "正在断开连接...",
-            disconnect_error: "断开连接时出错",
-            invalid_manual_address: "输入的地址无效。",
-            connecting_init: "正在初始化连接...",
-            ebud_token_label: "EBUD 代币",
-            luv_token_label: "LUV 代币",
-            green_token_label: "GREEN 代币",
-            hit_token_label: "HIT 代币",
-            bud_collection_label: "eBuds 收藏",
-        },
-        de: {
-            wallet_page_title: "eBuds Wallet",
-            connect_info_title: "Ihr Web3-Universum",
+        // Aici se adauga si celelalte limbi (ar, zh, de, es, fr, it, ja, ko, ro)...
+        ro: {
+            wallet_page_title: "Portofel eBuds",
+            connect_info_title: "Universul tău Web3",
             xportal_mobile_title: "📱 xPortal (Mobil)",
-            xportal_mobile_description: "Über die mobile Anwendung verbinden.",
-            generate_qr_button: "QR-Code generieren",
-            browser_extension_title: "🔌 Browser-Erweiterung",
-            browser_extension_description: "Verwenden Sie die MultiversX Browser-Erweiterung.",
-            connect_extension_button: "Erweiterung verbinden",
-            view_address_title: "👁️ Adresse anzeigen",
-            view_address_description: "Wallet-Adresse manuell eingeben, um Assets anzuzeigen.",
-            check_address_button: "Adresse prüfen",
-            disconnect_button: "Trennen",
-            back_button: "Zurück",
-            back_to_main_site: "← Zurück zur Hauptseite",
-            wallet_info_title: "Wallet-Informationen",
-            address_label: "Adresse:",
-            egld_balance_label: "EGLD-Guthaben:",
-            vote_power_label: "Abstimmungsmacht:",
-            vote_power_desc: "(basierend auf der Anzahl der gehaltenen eBuds NFTs)",
-            assets_title: "Assets im Wallet",
-            tokens_section_title: "🪙 Token",
-            nfts_section_title: "🖼️ NFT-Sammlungen",
-            no_tokens_message: "Sie besitzen keine Token (außer EGLD).",
-            no_other_nfts_message: "Sie besitzen keine anderen NFT-Sammlungen.",
-            loading_wallet_data: "Wallet-Daten werden geladen...",
-            invalid_address: "Ungültige Wallet-Adresse",
-            blockchain_error: "Fehler beim Abrufen der Blockchain-Daten",
-            elven_init_error: "Fehler beim Initialisieren von ElvenJS",
-            generating_qr: "QR-Code wird generiert...",
-            qr_error: "Fehler beim Generieren des QR-Codes",
-            connecting_extension: "Verbindung zur Erweiterung wird versucht...",
-            extension_error: "Fehler beim Verbinden der Erweiterung",
-            disconnecting: "Verbindung wird getrennt...",
-            disconnect_error: "Fehler beim Trennen",
-            invalid_manual_address: "Die eingegebene Adresse ist ungültig.",
-            connecting_init: "Verbindung wird initialisiert...",
-            ebud_token_label: "EBUD Token",
-            luv_token_label: "LUV Token",
-            green_token_label: "GREEN Token",
-            hit_token_label: "HIT Token",
-            bud_collection_label: "eBuds Sammlung",
-        },
-        es: {
-            wallet_page_title: "Cartera eBuds",
-            connect_info_title: "Tu Universo Web3",
-            xportal_mobile_title: "📱 xPortal (Móvil)",
-            xportal_mobile_description: "Conectar a través de la aplicación móvil.",
-            generate_qr_button: "Generar QR",
-            browser_extension_title: "🔌 Extensión del Navegador",
-            browser_extension_description: "Usa la extensión del navegador MultiversX.",
-            connect_extension_button: "Conectar Extensión",
-            view_address_title: "👁️ Ver Dirección",
-            view_address_description: "Introduce manualmente la dirección de la cartera para ver los activos.",
-            check_address_button: "Verificar Dirección",
-            disconnect_button: "Desconectar",
-            back_button: "Atrás",
-            back_to_main_site: "← Volver al Sitio Principal",
-            wallet_info_title: "Información de la Cartera",
-            address_label: "Dirección:",
-            egld_balance_label: "Saldo EGLD:",
-            vote_power_label: "Poder de Voto:",
-            vote_power_desc: "(basado en el número de NFTs eBuds que posees)",
-            assets_title: "Activos en la Cartera",
-            tokens_section_title: "🪙 Tokens",
-            nfts_section_title: "🖼️ Colecciones NFT",
-            no_tokens_message: "No posees ningún token (excluyendo EGLD).",
-            no_other_nfts_message: "No posees otras colecciones NFT.",
-            loading_wallet_data: "Cargando datos de la cartera...",
-            invalid_address: "Dirección de cartera inválida",
-            blockchain_error: "Error al obtener datos de la blockchain",
-            elven_init_error: "Error al inicializar ElvenJS",
-            generating_qr: "Generando código QR...",
-            qr_error: "Error al generar código QR",
-            connecting_extension: "Intentando conectar extensión...",
-            extension_error: "Error al conectar extensión",
-            disconnecting: "Desconectando...",
-            disconnect_error: "Error al desconectar",
-            invalid_manual_address: "La dirección introducida no es válida.",
-            connecting_init: "Inicializando conexión...",
-            ebud_token_label: "Token EBUD",
-            luv_token_label: "Token LUV",
-            green_token_label: "Token GREEN",
-            hit_token_label: "Token HIT",
-            bud_collection_label: "Colección eBuds",
-        },
-        fr: {
-            wallet_page_title: "Portefeuille eBuds",
-            connect_info_title: "Votre Univers Web3",
-            xportal_mobile_title: "📱 xPortal (Mobile)",
-            xportal_mobile_description: "Se connecter via l'application mobile.",
-            generate_qr_button: "Générer QR",
-            browser_extension_title: "🔌 Extension de Navigateur",
-            browser_extension_description: "Utilisez l'extension de navigateur MultiversX.",
-            connect_extension_button: "Connecter Extension",
-            view_address_title: "👁️ Voir l'Adresse",
-            view_address_description: "Entrez manuellement l'adresse du portefeuille pour voir les actifs.",
-            check_address_button: "Vérifier l'Adresse",
-            disconnect_button: "Déconnecter",
-            back_button: "Retour",
-            back_to_main_site: "← Retour au Site Principal",
-            wallet_info_title: "Informations du Portefeuille",
-            address_label: "Adresse :",
-            egld_balance_label: "Solde EGLD :",
-            vote_power_label: "Pouvoir de Vote :",
-            vote_power_desc: "(basé sur le nombre de NFTs eBuds détenus)",
-            assets_title: "Actifs dans le Portefeuille",
-            tokens_section_title: "🪙 Tokens",
-            nfts_section_title: "🖼️ Collections NFT",
-            no_tokens_message: "Vous ne détenez aucun token (hors EGLD).",
-            no_other_nfts_message: "Vous ne détenez aucune autre collection NFT.",
-            loading_wallet_data: "Chargement des données du portefeuille...",
-            invalid_address: "Adresse de portefeuille invalide",
-            blockchain_error: "Erreur lors de la récupération des données de la blockchain",
-            elven_init_error: "Erreur lors de l'initialisation d'ElvenJS",
-            generating_qr: "Génération du code QR...",
-            qr_error: "Erreur lors de la génération du code QR",
-            connecting_extension: "Tentative de connexion de l'extension...",
-            extension_error: "Erreur lors de la connexion de l'extension",
-            disconnecting: "Déconnexion...",
-            disconnect_error: "Erreur lors de la déconnexion",
-            invalid_manual_address: "L'adresse saisie n'est pas valide.",
-            connecting_init: "Initialisation de la connexion...",
-            ebud_token_label: "Token EBUD",
-            luv_token_label: "Token LUV",
-            green_token_label: "Token GREEN",
-            hit_token_label: "Token HIT",
-            bud_collection_label: "Collection eBuds",
-        },
-        it: {
-            wallet_page_title: "Portafoglio eBuds",
-            connect_info_title: "Il Tuo Universo Web3",
-            xportal_mobile_title: "📱 xPortal (Mobile)",
-            xportal_mobile_description: "Connetti tramite l'applicazione mobile.",
-            generate_qr_button: "Genera QR",
-            browser_extension_title: "🔌 Estensione del Browser",
-            browser_extension_description: "Usa l'estensione del browser MultiversX.",
-            connect_extension_button: "Connetti Estensione",
-            view_address_title: "👁️ Visualizza Indirizzo",
-            view_address_description: "Inserisci manualmente l'indirizzo del portafoglio per visualizzare gli asset.",
-            check_address_button: "Verifica Indirizzo",
-            disconnect_button: "Disconnetti",
-            back_button: "Indietro",
-            back_to_main_site: "← Torna al Sito Principale",
-            wallet_info_title: "Informazioni Portafoglio",
-            address_label: "Indirizzo:",
-            egld_balance_label: "Saldo EGLD:",
-            vote_power_label: "Potere di Voto:",
-            vote_power_desc: "(basato sul numero di NFT eBuds posseduti)",
-            assets_title: "Asset nel Portafoglio",
-            tokens_section_title: "🪙 Token",
-            nfts_section_title: "🖼️ Collezioni NFT",
-            no_tokens_message: "Non possiedi alcun token (escluso EGLD).",
-            no_other_nfts_message: "Non possiedi altre collezioni NFT.",
-            loading_wallet_data: "Caricamento dati portafoglio...",
-            invalid_address: "Indirizzo portafoglio non valido",
-            blockchain_error: "Errore nel recupero dati dalla blockchain",
-            elven_init_error: "Errore nell'inizializzazione di ElvenJS",
-            generating_qr: "Generazione codice QR...",
-            qr_error: "Errore nella generazione del codice QR",
-            connecting_extension: "Tentativo di connessione estensione...",
-            extension_error: "Errore nella connessione dell'estensione",
-            disconnecting: "Disconnessione...",
-            disconnect_error: "Errore nella disconnessione",
-            invalid_manual_address: "L'indirizzo inserito non è valido.",
-            connecting_init: "Inizializzazione connessione...",
-            ebud_token_label: "Token EBUD",
-            luv_token_label: "Token LUV",
-            green_token_label: "Token GREEN",
-            hit_token_label: "Token HIT",
-            bud_collection_label: "Collezione eBuds",
-        },
-        ja: {
-            wallet_page_title: "eBuds ウォレット",
-            connect_info_title: "あなたのWeb3ユニバース",
-            xportal_mobile_title: "📱 xPortal (モバイル)",
-            xportal_mobile_description: "モバイルアプリケーション経由で接続。",
-            generate_qr_button: "QR生成",
-            browser_extension_title: "🔌 ブラウザ拡張機能",
-            browser_extension_description: "MultiversXブラウザ拡張機能を使用。",
-            connect_extension_button: "拡張機能を接続",
-            view_address_title: "👁️ アドレス表示",
-            view_address_description: "ウォレットアドレスを手動で入力してアセットを表示。",
-            check_address_button: "アドレス確認",
-            disconnect_button: "切断",
-            back_button: "戻る",
-            back_to_main_site: "← メインサイトに戻る",
-            wallet_info_title: "ウォレット情報",
-            address_label: "アドレス：",
-            egld_balance_label: "EGLD残高：",
-            vote_power_label: "投票権：",
-            vote_power_desc: "（保有するeBuds NFTの数に基づく）",
-            assets_title: "ウォレット内のアセット",
-            tokens_section_title: "🪙 トークン",
-            nfts_section_title: "🖼️ NFTコレクション",
-            no_tokens_message: "トークンを保有していません（EGLDを除く）。",
-            no_other_nfts_message: "他のNFTコレクションを保有していません。",
-            loading_wallet_data: "ウォレットデータを読み込み中...",
-            invalid_address: "無効なウォレットアドレス",
-            blockchain_error: "ブロックチェーンからのデータ取得エラー",
-            elven_init_error: "ElvenJSの初期化エラー",
-            generating_qr: "QRコードを生成中...",
-            qr_error: "QRコード生成エラー",
-            connecting_extension: "拡張機能の接続を試行中...",
-            extension_error: "拡張機能接続エラー",
-            disconnecting: "切断中...",
-            disconnect_error: "切断エラー",
-            invalid_manual_address: "入力されたアドレスが無効です。",
-            connecting_init: "接続を初期化中...",
-            ebud_token_label: "EBUDトークン",
-            luv_token_label: "LUVトークン",
-            green_token_label: "GREENトークン",
-            hit_token_label: "HITトークン",
-            bud_collection_label: "eBudsコレクション",
-        },
-        ko: {
-            wallet_page_title: "eBuds 지갑",
-            connect_info_title: "당신의 Web3 유니버스",
-            xportal_mobile_title: "📱 xPortal (모바일)",
-            xportal_mobile_description: "모바일 애플리케이션을 통해 연결합니다.",
-            generate_qr_button: "QR 생성",
-            browser_extension_title: "🔌 브라우저 확장 프로그램",
-            browser_extension_description: "MultiversX 브라우저 확장 프로그램을 사용합니다.",
-            connect_extension_button: "확장 프로그램 연결",
-            view_address_title: "👁️ 주소 보기",
-            view_address_description: "지갑 주소를 수동으로 입력하여 자산을 확인합니다.",
-            check_address_button: "주소 확인",
-            disconnect_button: "연결 해제",
-            back_button: "뒤로",
-            back_to_main_site: "← 메인
+            xportal_mobile_description: "Conectează-te prin aplicația mobilă.",
+            generate_qr_button: "Generează QR",
+            browser_extension_title: "🔌 Extensie de Browser",
+            browser_extension_description: "Folosește extensia de browser MultiversX.",
+            connect_extension_button: "Conectează Extensia",
+            view_address_title: "👁️ Vizualizează Adresa",
+            view_address_description: "Introdu manual adresa portofelului pentru a vedea activele.",
+            check_address_button: "Verifică Adresa",
+            disconnect_button: "Deconectează",
+            back_button: "Înapoi",
+            back_to_main_site: "← Înapoi la Site-ul Principal",
+            wallet_info_title: "Informații Portofel",
+            address_label: "Adresă:",
+            egld_balance_label: "Sold EGLD:",
+            vote_power_label: "Putere de Vot:",
+            vote_power_desc: "(bazată pe numărul de NFT-uri eBuds deținute)",
+            assets_title: "Active în Portofel",
+            tokens_section_title: "🪙 Jetoane",
+            nfts_section_title: "🖼️ Colecții NFT",
+            no_tokens_message: "Nu deții niciun jeton (excluzând EGLD).",
+            no_other_nfts_message: "Nu deții nicio altă colecție NFT.",
+            loading_wallet_data: "Se încarcă datele portofelului...",
+            invalid_address: "Adresă de portofel invalidă",
+            blockchain_error: "Eroare la preluarea datelor de pe blockchain",
+            elven_init_error: "Eroare la inițializarea ElvenJS",
+            generating_qr: "Se generează codul QR...",
+            qr_error: "Eroare la generarea codului QR",
+            connecting_extension: "Se încearcă conectarea extensiei...",
+            extension_error: "Eroare la conectarea extensiei",
+            disconnecting: "Deconectare...",
+            disconnect_error: "Eroare la deconectare",
+            invalid_manual_address: "Adresa introdusă nu este validă.",
+            connecting_init: "Se inițializează conexiunea...",
+            ebud_token_label: "Jeton EBUD",
+            luv_token_label: "Jeton LUV",
+            green_token_label: "Jeton GREEN",
+            hit_token_label: "Jeton HIT",
+            bud_collection_label: "Colecția eBuds",
+        }
+    };
+
+    // --- AICI ÎNCEPE CODUL LIPSĂ ---
+
+    const elvenJs = ElvenJS.init({
+        apiUrl: "https://api.multiversx.com",
+        chain: "mainnet"
+    });
+
+    const connectionOptions = document.getElementById('connectionOptions');
+    const walletUI = document.getElementById('walletUI');
+    const walletDetails = document.getElementById('walletDetails');
+    const disconnectBtnNav = document.getElementById('disconnectBtnNav');
+    
+    const mobileBtn = document.getElementById('mobileBtn');
+    const extensionBtn = document.getElementById('extensionBtn');
+    const manualAddressBtn = document.getElementById('manualAddressBtn');
+    const manualAddressInput = document.getElementById('manualAddressInput');
+    const qrCodeContainer = document.getElementById('qr-code-container');
+    const languageSelector = document.getElementById('language-selector-wallet');
+
+    const ebudCollectionId = "EBUDS-158957"; // ID-ul colecției eBuds NFT
+    const trackedTokens = ["EBUD-4a6c4c", "LUV-ea581e", "GREEN-989f92", "HIT-0a256a"];
+
+    const setStatus = (message, type = 'general', isError = false) => {
+        const container = document.querySelector(`.status-container[data-status-for="${type}"]`);
+        if (container) {
+            container.innerHTML = `<p class="<span class="math-inline">\{isError ? 'error\-message' \: ''\}"\></span>{message}</p>`;
