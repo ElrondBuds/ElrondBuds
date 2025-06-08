@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en"> <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <title>eBuds - Wallet</title> <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Stilurile pentru scrollbar rămân neschimbate */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: hsl(var(--dark-bg, #030014));
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: hsl(var(--neon-green, #00ff9d));
+      border-radius: 10px;
+      border: 3px solid hsl(var(--dark-bg, #030014));
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: hsl(var(--highlight-color, #00ff9d));
+      filter: brightness(1.2);
+    }
+
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: hsl(var(--neon-green, #00ff9d)) hsl(var(--dark-bg, #030014));
+    }
+
+    .warning-icon {
+        color: #ffcc00;
+        cursor: help;
+        font-style: normal;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-overlay"></div>
+  <nav class="wallet-nav">
+    <div class="wallet-nav-container">
+        <a href="index.html" class="logo-link">
+            <img src="assets/logo.png" alt="eBuds Logo" class="nav-logo-wallet">
+        </a>
+        <div class="nav-title-group">
+            <h1 class="wallet-nav-title" data-translate-key="wallet_page_title">eBuds Wallet</h1>
+        </div>
+        <div class="nav-right-controls"> <div class="language-selector-container">
+                <select id="language-selector-wallet" aria-label="Select Language">
+                    <option value="en">EN</option>
+                    <option value="ar">AR</option> 
+                    <option value="zh">ZH</option> 
+                    <option value="de">DE</option> 
+                    <option value="es">ES</option> 
+                    <option value="fr">FR</option> 
+                    <option value="it">IT</option> 
+                    <option value="ja">JA</option> 
+                    <option value="ko">KO</option> 
+                    <option value="ro">RO</option> 
+                </select>
+            </div>
+            <button id="disconnectBtnNav" class="button-connect-wallet disconnect-button" data-translate-key="disconnect_button" style="display:none; margin-left: 10px;"></button>
+        </div>
+    </div>
+  </nav>
+
+  <div class="container-wrapper">
+    <div class="main-content-area">
+      <h1 data-translate-key="connect_info_title">Your Web3 Universe</h1>
+      <div id="connectionOptions" style="display: block;">
+        <!-- Container pentru mesaje de stare generale/de initializare -->
+        <div class="status-container" data-status-for="general"></div>
+        <div class="wallet-options-grid">
+          <div class="wallet-option">
+            <h3 data-translate-key="xportal_mobile_title">📱 xPortal (Mobile)</h3>
+            <p data-translate-key="xportal_mobile_description">Connect via the mobile application.</p>
+            <div id="qr-code-container" style="margin: 10px auto; max-width: 250px;"></div>
+            <div class="status-container" data-status-for="mobile"></div>
+            <button id="mobileBtn" class="button-connect-wallet" data-translate-key="generate_qr_button">Generate QR</button>
+          </div>
+          <div class="wallet-option" id="extensionWalletOption">
+            <h3 data-translate-key="browser_extension_title">🔌 Browser Extension</h3>
+            <p data-translate-key="browser_extension_description">Use the MultiversX browser extension.</p>
+            <div class="status-container" data-status-for="extension"></div>
+            <button id="extensionBtn" class="button-connect-wallet" data-translate-key="connect_extension_button">Connect Extension</button>
+          </div>
+        </div>
+
+        <div class="wallet-option manual-option">
+          <h3 data-translate-key="view_address_title">👁️ View Address</h3>
+          <p data-translate-key="view_address_description">Manually enter wallet address to view assets.</p>
+          <div class="manual-input">
+            <input type="text" id="manualAddressInput" placeholder="erd1..." />
+            <button id="manualAddressBtn" class="button-connect-wallet" data-translate-key="check_address_button">Check Address</button>
+          </div>
+          <div class="status-container" data-status-for="manual"></div>
+        </div>
+      </div>
+
+      <div id="walletUI" style="display: none;">
+        <div class="status-container" data-status-for="wallet-load"></div>
+        <div id="walletDetails" class="wallet-info-container"></div>
+      </div>
+
+      <div class="back-link-container">
+        <a href="index.html" class="back-link" data-translate-key="back_to_main_site">← Back to Main Site</a>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { ElvenJS } from 'https://unpkg.com/elven.js@0.20.0/build/elven.js';
+
+    const translations = {
+        en: {
+            wallet_page_title: "eBuds Wallet",
+            connect_info_title: "Your Web3 Universe",
+            xportal_mobile_title: "📱 xPortal (Mobile)",
+            xportal_mobile_description: "Connect via the mobile application.",
+            generate_qr_button: "Generate QR",
+            browser_extension_title: "🔌 Browser Extension",
+            browser_extension_description: "Use the MultiversX browser extension.",
+            connect_extension_button: "Connect Extension",
+            view_address_title: "👁️ View Address",
+            view_address_description: "Manually enter wallet address to view assets.",
+            check_address_button: "Check Address",
+            disconnect_button: "Disconnect",
+            back_button: "Back",
+            back_to_main_site: "← Back to Main Site",
+            wallet_info_title: "Wallet Information",
+            address_label: "Address:",
+            egld_balance_label: "EGLD Balance:",
+            vote_power_label: "Voting Power:",
+            vote_power_desc: "(based on number of eBuds NFTs held)",
+            assets_title: "Assets in Wallet",
+            tokens_section_title: "🪙 Tokens",
+            nfts_section_title: "🖼️ NFT Collections",
+            no_tokens_message: "You don't hold any tokens (excluding EGLD).",
+            no_other_nfts_message: "You don't hold any other NFT collections.",
+            loading_wallet_data: "Loading wallet data...",
+            invalid_address: "Invalid wallet address",
+            blockchain_error: "Error fetching data from blockchain",
+            elven_init_error: "Error initializing ElvenJS",
+            generating_qr: "Generating QR code...",
+            qr_error: "Error generating QR code",
+            connecting_extension: "Attempting to connect extension...",
+            extension_error: "Error connecting extension",
+            disconnecting: "Disconnecting...",
+            disconnect_error: "Error disconnecting",
+            invalid_manual_address: "The entered address is invalid.",
+            connecting_init: "Initializing connection...",
+            ebud_token_label: " Token EBUD",
+            luv_token_label: "LUV Token",
+            green_token_label: "GREEN Token",
+            hit_token_label: "HIT Token",
+            bud_collection_label: "eBuds Collection",
+        },
+        ro: {
+            wallet_page_title: "Portofel eBuds",
+            connect_info_title: "Universul tău Web3",
+            xportal_mobile_title: "📱 xPortal (Mobil)",
+            xportal_mobile_description: "Conectează-te prin aplicația mobilă.",
+            generate_qr_button: "Generează QR",
+            browser_extension_title: "🔌 Extensie Browser",
+            browser_extension_description: "Folosește extensia de browser MultiversX.",
+            connect_extension_button: "Conectează Extensia",
+            view_address_title: "👁️ Vizualizare Adresă",
+            view_address_description: "Introdu manual adresa portofelului pentru a vizualiza activele.",
+            check_address_button: "Verifică Adresa",
+            disconnect_button: "Deconectare",
+            back_button: "Înapoi",
+            back_to_main_site: "← Înapoi la Site-ul Principal",
+            wallet_info_title: "Informații Portofel",
+            address_label: "Adresă:",
+            egld_balance_label: "Sold EGLD:",
+            vote_power_label: "Putere de Vot:",
+            vote_power_desc: "(bazată pe numărul de eBuds NFTs deținute)",
+            assets_title: "Active în Portofel",
+            tokens_section_title: "🪙 Tokeni",
+            nfts_section_title: "🖼️ Colecții NFT",
+            no_tokens_message: "Nu dețineți tokeni (excluzând EGLD).",
+            no_other_nfts_message: "Nu dețineți alte colecții NFT.",
+            loading_wallet_data: "Se încarcă datele portofelului...",
+            invalid_address: "Adresă portofel invalidă",
+            blockchain_error: "Eroare la obținerea datelor de pe blockchain",
+            elven_init_error: "Eroare la inițializarea ElvenJS",
+            generating_qr: "Se generează codul QR...",
+            qr_error: "Eroare la generarea codului QR",
+            connecting_extension: "Se încearcă conectarea extensiei...",
+            extension_error: "Eroare la conectarea extensiei",
+            disconnecting: "Se deconectează...",
+            disconnect_error: "Eroare la deconectare",
+            invalid_manual_address: "Adresa introdusă nu este validă.",
+            connecting_init: "Se inițiază conectarea...",
+            ebud_token_label: "Token EBUD",
+            luv_token_label: "Token LUV",
+            green_token_label: "Token GREEN",
+            hit_token_label: "Token HIT",
+            bud_collection_label: "Colecția eBuds",
+        },
+    };
+
+    function translatePage(language) {
+        document.documentElement.lang = language;
+        const translatableElements = document.querySelectorAll('[data-translate-key]');
+        translatableElements.forEach(element => {
+            const key = element.getAttribute('data-translate-key');
+            if (translations[language] && translations[language][key]) {
+                element.innerHTML = translations[language][key];
+            } else if (translations.en && translations.en[key]) {
+                 element.innerHTML = translations.en[key];
+            }
+        });
+        const pageTitleElement = document.querySelector('head title');
+        if (pageTitleElement) {
+            pageTitleElement.textContent = translations[language]?.['wallet_page_title'] || translations.en['wallet_page_title'];
+        }
+    }
+
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const connectionOptions = document.getElementById('connectionOptions');
+      const walletUI = document.getElementById('walletUI');
+      const walletDetails = document.getElementById('walletDetails');
+      const manualAddressInput = document.getElementById('manualAddressInput');
+      const languageSelector = document.getElementById('language-selector-wallet');
+      
+      const proxyUrl = 'https://api.codetabs.com/v1/proxy?quest=';
+      const restApiBase = 'https://api.multiversx.com';
+      
+      const ebudsCollectionId = 'BUD-3ee0cf';
+      let isManualConnection = false;
+      let loginTarget = 'general';
+
+      if (languageSelector) {
+        translatePage(languageSelector.value);
+        languageSelector.addEventListener('change', async (event) => {
+            translatePage(event.target.value);
+            const rawAddress = ElvenJS.storage.get('address');
+            const addressString = typeof rawAddress === 'object' && rawAddress?.address
+                                 ? rawAddress.address
+                                 : (typeof rawAddress === 'string' ? rawAddress : '');
+            if (addressString.startsWith('erd1') && addressString.length === 62) {
+                await fetchWalletData(addressString);
+            }
+        });
+      } else {
+        translatePage('en');
+      }
+
+      const hideStatus = () => {
+        document.querySelectorAll('.status-container').forEach(container => {
+            container.innerHTML = '';
+        });
+      };
+
+      const showStatus = (targetType, messageKey, type = 'loading', errorDetails = '') => {
+        hideStatus();
+
+        const targetContainer = document.querySelector(`.status-container[data-status-for="${targetType}"]`);
+        if (!targetContainer) {
+            console.error(`Status container for "${targetType}" not found.`);
+            return;
+        }
+
+        const currentLang = languageSelector ? languageSelector.value : 'en';
+        let message = (translations[currentLang]?.[messageKey] || translations.en[messageKey] || messageKey).toString();
+        if (type === 'error' && errorDetails) {
+            message += `: ${errorDetails}`;
+        }
+
+        const statusDiv = document.createElement('div');
+        statusDiv.className = `status-message status-${type}`;
+        statusDiv.textContent = message;
+        targetContainer.appendChild(statusDiv);
+      };
+      
+      const resolveIpfsUrl = (originalUrl) => {
+        if (!originalUrl || typeof originalUrl !== 'string') return '';
+        
+        const reliableGateway = 'https://dweb.link/ipfs/';
+
+        if (originalUrl.startsWith('ipfs://')) {
+            const ipfsHash = originalUrl.replace('ipfs://', '');
+            return `${reliableGateway}${ipfsHash}`;
+        }
+        
+        if (originalUrl.includes('tools.multiversx.com') || originalUrl.includes('media.elrond.com')) {
+            return originalUrl;
+        }
+
+        const ipfsPattern = /\/ipfs\/(Qm[1-9A-Za-z]{44}|bafy[0-9a-zA-Z]{50,})/;
+        const match = originalUrl.match(ipfsPattern);
+
+        if (match && match[1]) {
+            const ipfsHash = match[1];
+            return `${reliableGateway}${ipfsHash}`;
+        }
+
+        if (originalUrl.match(/^(Qm[1-9A-Za-z]{44}|bafy[0-9a-zA-Z]{50,})$/)) {
+            return `${reliableGateway}${originalUrl}`;
+        }
+
+        if (originalUrl.startsWith('http')) {
+            return originalUrl;
+        }
+
+        return ''; 
+      };
+
+    const truncateAddress = (address) => {
+        if (!address || address.length < 12) return address;
+        return `${address.substring(0, 7)}...${address.substring(address.length - 5)}`;
+    };
+
+    const displayData = (address, nfts, tokens, accountData) => {
+        const votePower = nfts.filter(nft => nft.collection === ebudsCollectionId).length;
+        const currentLang = languageSelector ? languageSelector.value : 'en';
+        const t = translations[currentLang] || translations.en;
+        
+        const truncatedAddr = truncateAddress(address);
+        
+        const egldBalanceValue = accountData && accountData.balance ? (parseFloat(accountData.balance) / (10 ** 18)).toFixed(4) : (0).toFixed(4);
+
+        let html = `
+          <h2>${t.wallet_info_title}</h2>
+          <p><strong>${t.address_label}</strong> <a href="https://explorer.multiversx.com/accounts/${address}" target="_blank" rel="noopener noreferrer" title="${address}">${truncatedAddr} ↗</a></p>
+          <p><strong>${t.egld_balance_label}</strong> ${egldBalanceValue} EGLD</p> 
+          <div class="vote-power-card">
+            <strong>🏆 ${t.vote_power_label} ${votePower}</strong>
+            <br><small>${t.vote_power_desc}</small>
+          </div>
+        `;
+
+        html += `<div class="assets-title">${t.assets_title}</div><div class="assets-grid">`;
+
+        const allTokensForDisplay = [];
+        const fixedTokensOrder = ['EBUD-d29cce', 'LUV-310136', 'GREEN-1c62ca', 'HIT-3f109b'];
+
+        fixedTokensOrder.forEach(fixedId => {
+            let tokenInfo = tokens.find(t => t.identifier === fixedId);
+            
+            if (fixedId === 'EBUD-d29cce') {
+                allTokensForDisplay.push({
+                    identifier: fixedId,
+                    name: t.ebud_token_label,
+                    balance: tokenInfo ? tokenInfo.balance : '0',
+                    decimals: tokenInfo ? tokenInfo.decimals : 0,
+                    assets: {
+                        svgUrl: 'https://tools.multiversx.com/assets-cdn/tokens/EBUD-d29cce/icon.svg'
+                    },
+                    iconType: 'home'
+                });
+            } else if (tokenInfo) {
+                allTokensForDisplay.push({
+                    identifier: fixedId,
+                    name: fixedId === 'LUV-310136' ? t.luv_token_label : (fixedId === 'GREEN-1c62ca' ? t.green_token_label : t.hit_token_label),
+                    balance: tokenInfo.balance,
+                    decimals: tokenInfo.decimals,
+                    assets: tokenInfo.assets,
+                    iconType: 'favorite'
+                });
+            }
+        });
+        const remainingTokens = tokens.filter(token =>
+            token.identifier !== 'EGLD' && !fixedTokensOrder.includes(token.identifier) && parseFloat(token.balance) / (10 ** (token.decimals || 0)) > 0
+        ).sort((a, b) => (a.name || a.identifier).localeCompare(b.name || b.identifier));
+
+        remainingTokens.forEach(token => allTokensForDisplay.push(token));
+
+
+        if (allTokensForDisplay.length > 0) {
+            html += `<div class="asset-column"><h4>${t.tokens_section_title}</h4><ul class="token-list">`;
+            allTokensForDisplay.forEach(token => {
+                const logoUrl = resolveIpfsUrl(token.assets?.svgUrl || token.assets?.pngUrl || '');
+                
+                let specialIcon = '';
+                if (token.iconType === 'home') {
+                    specialIcon = '<span class="home-icon">🏠</span>';
+                } else if (token.iconType === 'favorite') {
+                    specialIcon = '<span class="favorite-icon">⭐</span>';
+                }
+
+                html += `<li>
+                            <div class="asset-logo-container">
+                                <img src="${logoUrl || 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='}"
+                                     class="asset-logo" alt="${token.name || token.identifier}"
+                                     onerror="this.parentElement.innerHTML = '<div class=&quot;asset-placeholder-logo&quot;>${(token.name || token.identifier).substring(0, 2).toUpperCase()}</div>';">
+                            </div>
+                            <div class="asset-info">
+                                <div class="asset-name">
+                                    <a href="https://explorer.multiversx.com/tokens/${token.identifier}" target="_blank" rel="noopener noreferrer">${token.name || token.identifier} ↗</a>
+                                    ${specialIcon}
+                                </div>
+                                <div class="asset-balance">
+                                    <span>${(token.balance / (10 ** (token.decimals || 0))).toFixed(token.decimals > 4 ? 4 : token.decimals || 0)}</span>
+                                </div>
+                            </div>
+                        </li>`;
+            });
+            html += `</ul></div>`;
+        } else {
+            html += `<div class="asset-column"><h4>${t.tokens_section_title}</h4><p>${t.no_tokens_message}</p></div>`;
+        }
+        
+        const userNftsByCollection = {};
+        nfts.forEach(nft => {
+            const col = nft.collection;
+            if (!userNftsByCollection[col]) {
+                userNftsByCollection[col] = {
+                    collectionId: col,
+                    collectionName: nft.name?.split('-')[0].trim() || col,
+                    count: 0,
+                    logoUrl: resolveIpfsUrl(nft.media?.[0]?.url || nft.url)
+                };
+            }
+            userNftsByCollection[col].count++;
+        });
+
+        const allCollections = Object.values(userNftsByCollection);
+        const budIndex = allCollections.findIndex(c => c.collectionId === ebudsCollectionId);
+        let allNftsForDisplay = [];
+
+        if (budIndex > -1) {
+            const budCollection = allCollections.splice(budIndex, 1)[0];
+            budCollection.count = votePower;
+            allNftsForDisplay.push({
+                ...budCollection,
+                collectionName: t.bud_collection_label,
+                iconType: 'home'
+            });
+        }
+        
+        allCollections.sort((a,b) => a.collectionName.localeCompare(b.collectionName));
+        allNftsForDisplay.push(...allCollections);
+
+
+        if (allNftsForDisplay.length > 0) {
+            html += `<div class="asset-column"><h4>${t.nfts_section_title}</h4><ul class="nft-collections-list">`;
+            allNftsForDisplay.forEach(col => {
+                const logo = col.logoUrl;
+                const sanitizedCollectionId = col.collectionId.replace(/[^a-zA-Z0-9]/g, '');
+                
+                let specialIcon = '';
+                if (col.iconType === 'home') {
+                    specialIcon = '<span class="home-icon">🏠</span>';
+                }
+
+                html += `<li>
+                            <div class="asset-logo-container">
+                                <img src="${logo || 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='}"
+                                     class="asset-logo" alt="${col.collectionName}"
+                                     onerror="this.parentElement.innerHTML = \`<div class='asset-placeholder-logo'>${col.collectionName.substring(0, 2).toUpperCase()}</div>\`;">
+                            </div>
+                            <div class="asset-info">
+                                <div class="asset-name" id="nft-name-${sanitizedCollectionId}">
+                                    <a href="https://explorer.multiversx.com/collections/${col.collectionId}" target="_blank" rel="noopener noreferrer">${col.collectionName} ↗</a>
+                                    ${specialIcon}
+                                </div>
+                                <div class="asset-balance">
+                                    <span>${col.count} NFT${col.count !== 1 ? 's' : ''}</span>
+                                </div>
+                            </div>
+                        </li>`;
+            });
+            html += `</ul></div>`;
+        } else {
+            html += `<div class="asset-column"><h4>${t.nfts_section_title}</h4><p>${t.no_other_nfts_message}</p></div>`;
+        }
+
+        html += `</div>`; 
+
+        walletDetails.innerHTML = html;
+      };
+
+      const fetchWalletData = async (address) => {
+        showStatus('wallet-load', 'loading_wallet_data');
+
+        try {
+          if (!address || typeof address !== 'string' || !address.startsWith('erd1') || address.length !== 62) {
+            throw new Error(translations[languageSelector.value]?.invalid_address || translations.en.invalid_address);
+          }
+          
+          const fullApiUrl = `${proxyUrl}${restApiBase}`;
+
+          const [accountRes, tokensRes, nftsRes] = await Promise.all([
+            fetch(`${fullApiUrl}/accounts/${address}`),
+            fetch(`${fullApiUrl}/accounts/${address}/tokens?size=100`),
+            fetch(`${fullApiUrl}/accounts/${address}/nfts?size=1000`),
+          ]);
+
+          if (!accountRes.ok || !tokensRes.ok || !nftsRes.ok) {
+            throw new Error(translations[languageSelector.value]?.blockchain_error || translations.en.blockchain_error);
+          }
+
+          const accountData = await accountRes.json();
+          const tokensData = await tokensRes.json();
+          const nftsData = await nftsRes.json();
+          
+          const filteredTokens = tokensData.filter(t => parseFloat(t.balance) / (10 ** (t.decimals || 0)) > 0 || t.identifier === 'EGLD');
+          
+          hideStatus();
+          displayData(address, nftsData, filteredTokens, accountData);
+
+        } catch (e) {
+          hideStatus();
+          showStatus('wallet-load', 'blockchain_error', 'error', e.message || 'Unknown Error');
+          if (!isManualConnection) {
+              setTimeout(() => {
+                  showLoginUI();
+              }, 3000);
+          }
+        }
+      };
+      
+      const showLoginUI = () => {
+        connectionOptions.style.display = 'block';
+        walletUI.style.display = 'none';
+        isManualConnection = false;
+        const qrCodeContainer = document.getElementById('qr-code-container');
+        if (qrCodeContainer) {
+            qrCodeContainer.innerHTML = '';
+        }
+        document.querySelector('#disconnectBtnNav').style.display = 'none';
+        hideStatus();
+      };
+
+      const showWalletUI = async (address, manual = false) => {
+        connectionOptions.style.display = 'none';
+        walletUI.style.display = 'block';
+        isManualConnection = manual;
+        const disconnectBtnNav = document.getElementById('disconnectBtnNav');
+        if (disconnectBtnNav) {
+            disconnectBtnNav.textContent = (translations[languageSelector.value] || translations.en)[isManualConnection ? 'back_button' : 'disconnect_button'];
+            disconnectBtnNav.className = isManualConnection ? 'button-connect-wallet' : 'button-connect-wallet disconnect-button';
+            disconnectBtnNav.style.display = 'inline-block';
+        }
+        await fetchWalletData(address);
+      };
+
+      const initElven = async () => {
+        try {
+          await ElvenJS.init({
+            chainType: 'mainnet',
+ // Remember to change it. Get yours here: https://cloud.walletconnect.com/sign-in
+            walletConnectV2ProjectId: '<your_wc_project_id_here>',
+            onLoginStart: () => {
+                showStatus(loginTarget, 'connecting_init');
+            },
+            onLoginSuccess: () => {
+              hideStatus();
+              const raw = ElvenJS.storage.get('address');
+              const addressString = typeof raw === 'object' && raw?.address ? raw.address : (typeof raw === 'string' ? raw : '');
+              if (addressString.startsWith('erd1') && addressString.length === 62) {
+                setTimeout(() => showWalletUI(addressString, false), 100);
+              }
+            },
+            onLoginFailure: (error) => {
+                showStatus(loginTarget, 'extension_error', 'error', error.message || 'Unknown Error');
+                setTimeout(hideStatus, 3000);
+            },
+            onQrPending: () => {
+                showStatus('mobile', 'generating_qr');
+            },
+            onQrLoaded: () => {
+                hideStatus();
+            },
+            onLogoutStart: () => {
+                showStatus('wallet-load', 'disconnecting');
+            },
+            onLogoutSuccess: () => {
+                showLoginUI();
+            },
+            onLogoutFailure: (error) => {
+                showStatus('wallet-load', 'disconnect_error', 'error', error || 'Unknown Error');
+                setTimeout(hideStatus, 3000);
+            },
+          });
+        } catch (err) {
+          showStatus('general', 'elven_init_error', 'error', err.message);
+          setTimeout(hideStatus, 3000);
+        }
+      };
+      
+      await initElven();
+
+      const rawAddress = ElvenJS.storage.get('address');
+      const addressString = typeof rawAddress === 'object' && rawAddress?.address
+        ? rawAddress.address
+        : (typeof rawAddress === 'string' ? rawAddress : '');
+
+      if (addressString.startsWith('erd1') && addressString.length === 62) {
+        setTimeout(() => showWalletUI(addressString, false), 100);
+      } else {
+        showLoginUI();
+      }
+
+      document.getElementById('mobileBtn').addEventListener('click', async () => {
+        try {
+            loginTarget = 'mobile';
+            await ElvenJS.login('mobile', { qrCodeContainer: 'qr-code-container' });
+        } catch (error) {
+            showStatus('mobile', 'qr_error', 'error', error.message);
+        }
+      });
+
+      document.getElementById('extensionBtn').addEventListener('click', async () => {
+        try {
+            loginTarget = 'extension';
+            await ElvenJS.login('browser-extension');
+        } catch (error) {
+            showStatus('extension', 'extension_error', 'error', error.message);
+        }
+      });
+
+      document.getElementById('disconnectBtnNav').addEventListener('click', async () => {
+        if (isManualConnection) {
+          showLoginUI(); 
+        } else {
+          const currentAddress = ElvenJS.storage.get('address'); 
+          if (currentAddress) { 
+              await ElvenJS.logout(); 
+          } else {
+              showLoginUI(); 
+          }
+        }
+      });
+
+      document.getElementById('manualAddressBtn').addEventListener('click', async () => {
+        const address = manualAddressInput.value.trim();
+        if (address.startsWith('erd1') && address.length === 62) {
+          await showWalletUI(address, true);
+        } else {
+          showStatus('manual', 'invalid_manual_address', 'error');
+          setTimeout(hideStatus, 3000);
+        }
+      });
+      
+    });
+  </script>
+</body>
+</html>
