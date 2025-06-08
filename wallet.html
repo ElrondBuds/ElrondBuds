@@ -153,494 +153,325 @@
             disconnect_error: "Error disconnecting",
             invalid_manual_address: "The entered address is invalid.",
             connecting_init: "Initializing connection...",
-            ebud_token_label: " Token EBUD",
+            ebud_token_label: "EBUD Token",
             luv_token_label: "LUV Token",
             green_token_label: "GREEN Token",
             hit_token_label: "HIT Token",
             bud_collection_label: "eBuds Collection",
         },
-        ro: {
-            wallet_page_title: "Portofel eBuds",
-            connect_info_title: "Universul tău Web3",
+        ar: {
+            wallet_page_title: "محفظة eBuds",
+            connect_info_title: "عالم Web3 الخاص بك",
+            xportal_mobile_title: "📱 xPortal (موبايل)",
+            xportal_mobile_description: "الاتصال عبر تطبيق الهاتف المحمول.",
+            generate_qr_button: "إنشاء رمز QR",
+            browser_extension_title: "🔌 امتداد المتصفح",
+            browser_extension_description: "استخدم امتداد متصفح MultiversX.",
+            connect_extension_button: "ربط الامتداد",
+            view_address_title: "👁️ عرض العنوان",
+            view_address_description: "أدخل عنوان المحفظة يدوياً لعرض الأصول.",
+            check_address_button: "فحص العنوان",
+            disconnect_button: "قطع الاتصال",
+            back_button: "رجوع",
+            back_to_main_site: "← العودة إلى الموقع الرئيسي",
+            wallet_info_title: "معلومات المحفظة",
+            address_label: "العنوان:",
+            egld_balance_label: "رصيد EGLD:",
+            vote_power_label: "قوة التصويت:",
+            vote_power_desc: "(بناءً على عدد NFTs eBuds المملوكة)",
+            assets_title: "الأصول في المحفظة",
+            tokens_section_title: "🪙 الرموز المميزة",
+            nfts_section_title: "🖼️ مجموعات NFT",
+            no_tokens_message: "لا تملك أي رموز مميزة (باستثناء EGLD).",
+            no_other_nfts_message: "لا تملك أي مجموعات NFT أخرى.",
+            loading_wallet_data: "جاري تحميل بيانات المحفظة...",
+            invalid_address: "عنوان محفظة غير صالح",
+            blockchain_error: "خطأ في جلب البيانات من البلوك تشين",
+            elven_init_error: "خطأ في تهيئة ElvenJS",
+            generating_qr: "جاري إنشاء رمز QR...",
+            qr_error: "خطأ في إنشاء رمز QR",
+            connecting_extension: "محاولة ربط الامتداد...",
+            extension_error: "خطأ في ربط الامتداد",
+            disconnecting: "جاري قطع الاتصال...",
+            disconnect_error: "خطأ في قطع الاتصال",
+            invalid_manual_address: "العنوان المدخل غير صالح.",
+            connecting_init: "بدء الاتصال...",
+            ebud_token_label: "رمز EBUD",
+            luv_token_label: "رمز LUV",
+            green_token_label: "رمز GREEN",
+            hit_token_label: "رمز HIT",
+            bud_collection_label: "مجموعة eBuds",
+        },
+        zh: {
+            wallet_page_title: "eBuds 钱包",
+            connect_info_title: "您的 Web3 宇宙",
+            xportal_mobile_title: "📱 xPortal (手机)",
+            xportal_mobile_description: "通过手机应用程序连接。",
+            generate_qr_button: "生成二维码",
+            browser_extension_title: "🔌 浏览器扩展",
+            browser_extension_description: "使用 MultiversX 浏览器扩展。",
+            connect_extension_button: "连接扩展",
+            view_address_title: "👁️ 查看地址",
+            view_address_description: "手动输入钱包地址以查看资产。",
+            check_address_button: "检查地址",
+            disconnect_button: "断开连接",
+            back_button: "返回",
+            back_to_main_site: "← 返回主站",
+            wallet_info_title: "钱包信息",
+            address_label: "地址：",
+            egld_balance_label: "EGLD 余额：",
+            vote_power_label: "投票权重：",
+            vote_power_desc: "（基于持有的 eBuds NFT 数量）",
+            assets_title: "钱包中的资产",
+            tokens_section_title: "🪙 代币",
+            nfts_section_title: "🖼️ NFT 收藏",
+            no_tokens_message: "您没有持有任何代币（除了 EGLD）。",
+            no_other_nfts_message: "您没有持有其他 NFT 收藏。",
+            loading_wallet_data: "正在加载钱包数据...",
+            invalid_address: "无效的钱包地址",
+            blockchain_error: "从区块链获取数据时出错",
+            elven_init_error: "初始化 ElvenJS 时出错",
+            generating_qr: "正在生成二维码...",
+            qr_error: "生成二维码时出错",
+            connecting_extension: "正在尝试连接扩展...",
+            extension_error: "连接扩展时出错",
+            disconnecting: "正在断开连接...",
+            disconnect_error: "断开连接时出错",
+            invalid_manual_address: "输入的地址无效。",
+            connecting_init: "正在初始化连接...",
+            ebud_token_label: "EBUD 代币",
+            luv_token_label: "LUV 代币",
+            green_token_label: "GREEN 代币",
+            hit_token_label: "HIT 代币",
+            bud_collection_label: "eBuds 收藏",
+        },
+        de: {
+            wallet_page_title: "eBuds Wallet",
+            connect_info_title: "Ihr Web3-Universum",
             xportal_mobile_title: "📱 xPortal (Mobil)",
-            xportal_mobile_description: "Conectează-te prin aplicația mobilă.",
-            generate_qr_button: "Generează QR",
-            browser_extension_title: "🔌 Extensie Browser",
-            browser_extension_description: "Folosește extensia de browser MultiversX.",
-            connect_extension_button: "Conectează Extensia",
-            view_address_title: "👁️ Vizualizare Adresă",
-            view_address_description: "Introdu manual adresa portofelului pentru a vizualiza activele.",
-            check_address_button: "Verifică Adresa",
-            disconnect_button: "Deconectare",
-            back_button: "Înapoi",
-            back_to_main_site: "← Înapoi la Site-ul Principal",
-            wallet_info_title: "Informații Portofel",
-            address_label: "Adresă:",
-            egld_balance_label: "Sold EGLD:",
-            vote_power_label: "Putere de Vot:",
-            vote_power_desc: "(bazată pe numărul de eBuds NFTs deținute)",
-            assets_title: "Active în Portofel",
-            tokens_section_title: "🪙 Tokeni",
-            nfts_section_title: "🖼️ Colecții NFT",
-            no_tokens_message: "Nu dețineți tokeni (excluzând EGLD).",
-            no_other_nfts_message: "Nu dețineți alte colecții NFT.",
-            loading_wallet_data: "Se încarcă datele portofelului...",
-            invalid_address: "Adresă portofel invalidă",
-            blockchain_error: "Eroare la obținerea datelor de pe blockchain",
-            elven_init_error: "Eroare la inițializarea ElvenJS",
-            generating_qr: "Se generează codul QR...",
-            qr_error: "Eroare la generarea codului QR",
-            connecting_extension: "Se încearcă conectarea extensiei...",
-            extension_error: "Eroare la conectarea extensiei",
-            disconnecting: "Se deconectează...",
-            disconnect_error: "Eroare la deconectare",
-            invalid_manual_address: "Adresa introdusă nu este validă.",
-            connecting_init: "Se inițiază conectarea...",
+            xportal_mobile_description: "Über die mobile Anwendung verbinden.",
+            generate_qr_button: "QR-Code generieren",
+            browser_extension_title: "🔌 Browser-Erweiterung",
+            browser_extension_description: "Verwenden Sie die MultiversX Browser-Erweiterung.",
+            connect_extension_button: "Erweiterung verbinden",
+            view_address_title: "👁️ Adresse anzeigen",
+            view_address_description: "Wallet-Adresse manuell eingeben, um Assets anzuzeigen.",
+            check_address_button: "Adresse prüfen",
+            disconnect_button: "Trennen",
+            back_button: "Zurück",
+            back_to_main_site: "← Zurück zur Hauptseite",
+            wallet_info_title: "Wallet-Informationen",
+            address_label: "Adresse:",
+            egld_balance_label: "EGLD-Guthaben:",
+            vote_power_label: "Abstimmungsmacht:",
+            vote_power_desc: "(basierend auf der Anzahl der gehaltenen eBuds NFTs)",
+            assets_title: "Assets im Wallet",
+            tokens_section_title: "🪙 Token",
+            nfts_section_title: "🖼️ NFT-Sammlungen",
+            no_tokens_message: "Sie besitzen keine Token (außer EGLD).",
+            no_other_nfts_message: "Sie besitzen keine anderen NFT-Sammlungen.",
+            loading_wallet_data: "Wallet-Daten werden geladen...",
+            invalid_address: "Ungültige Wallet-Adresse",
+            blockchain_error: "Fehler beim Abrufen der Blockchain-Daten",
+            elven_init_error: "Fehler beim Initialisieren von ElvenJS",
+            generating_qr: "QR-Code wird generiert...",
+            qr_error: "Fehler beim Generieren des QR-Codes",
+            connecting_extension: "Verbindung zur Erweiterung wird versucht...",
+            extension_error: "Fehler beim Verbinden der Erweiterung",
+            disconnecting: "Verbindung wird getrennt...",
+            disconnect_error: "Fehler beim Trennen",
+            invalid_manual_address: "Die eingegebene Adresse ist ungültig.",
+            connecting_init: "Verbindung wird initialisiert...",
+            ebud_token_label: "EBUD Token",
+            luv_token_label: "LUV Token",
+            green_token_label: "GREEN Token",
+            hit_token_label: "HIT Token",
+            bud_collection_label: "eBuds Sammlung",
+        },
+        es: {
+            wallet_page_title: "Cartera eBuds",
+            connect_info_title: "Tu Universo Web3",
+            xportal_mobile_title: "📱 xPortal (Móvil)",
+            xportal_mobile_description: "Conectar a través de la aplicación móvil.",
+            generate_qr_button: "Generar QR",
+            browser_extension_title: "🔌 Extensión del Navegador",
+            browser_extension_description: "Usa la extensión del navegador MultiversX.",
+            connect_extension_button: "Conectar Extensión",
+            view_address_title: "👁️ Ver Dirección",
+            view_address_description: "Introduce manualmente la dirección de la cartera para ver los activos.",
+            check_address_button: "Verificar Dirección",
+            disconnect_button: "Desconectar",
+            back_button: "Atrás",
+            back_to_main_site: "← Volver al Sitio Principal",
+            wallet_info_title: "Información de la Cartera",
+            address_label: "Dirección:",
+            egld_balance_label: "Saldo EGLD:",
+            vote_power_label: "Poder de Voto:",
+            vote_power_desc: "(basado en el número de NFTs eBuds que posees)",
+            assets_title: "Activos en la Cartera",
+            tokens_section_title: "🪙 Tokens",
+            nfts_section_title: "🖼️ Colecciones NFT",
+            no_tokens_message: "No posees ningún token (excluyendo EGLD).",
+            no_other_nfts_message: "No posees otras colecciones NFT.",
+            loading_wallet_data: "Cargando datos de la cartera...",
+            invalid_address: "Dirección de cartera inválida",
+            blockchain_error: "Error al obtener datos de la blockchain",
+            elven_init_error: "Error al inicializar ElvenJS",
+            generating_qr: "Generando código QR...",
+            qr_error: "Error al generar código QR",
+            connecting_extension: "Intentando conectar extensión...",
+            extension_error: "Error al conectar extensión",
+            disconnecting: "Desconectando...",
+            disconnect_error: "Error al desconectar",
+            invalid_manual_address: "La dirección introducida no es válida.",
+            connecting_init: "Inicializando conexión...",
             ebud_token_label: "Token EBUD",
             luv_token_label: "Token LUV",
             green_token_label: "Token GREEN",
             hit_token_label: "Token HIT",
-            bud_collection_label: "Colecția eBuds",
+            bud_collection_label: "Colección eBuds",
         },
-    };
-
-    function translatePage(language) {
-        document.documentElement.lang = language;
-        const translatableElements = document.querySelectorAll('[data-translate-key]');
-        translatableElements.forEach(element => {
-            const key = element.getAttribute('data-translate-key');
-            if (translations[language] && translations[language][key]) {
-                element.innerHTML = translations[language][key];
-            } else if (translations.en && translations.en[key]) {
-                 element.innerHTML = translations.en[key];
-            }
-        });
-        const pageTitleElement = document.querySelector('head title');
-        if (pageTitleElement) {
-            pageTitleElement.textContent = translations[language]?.['wallet_page_title'] || translations.en['wallet_page_title'];
-        }
-    }
-
-
-    document.addEventListener("DOMContentLoaded", async () => {
-      const connectionOptions = document.getElementById('connectionOptions');
-      const walletUI = document.getElementById('walletUI');
-      const walletDetails = document.getElementById('walletDetails');
-      const manualAddressInput = document.getElementById('manualAddressInput');
-      const languageSelector = document.getElementById('language-selector-wallet');
-      
-      const proxyUrl = 'https://api.codetabs.com/v1/proxy?quest=';
-      const restApiBase = 'https://api.multiversx.com';
-      
-      const ebudsCollectionId = 'BUD-3ee0cf';
-      let isManualConnection = false;
-      let loginTarget = 'general';
-
-      if (languageSelector) {
-        translatePage(languageSelector.value);
-        languageSelector.addEventListener('change', async (event) => {
-            translatePage(event.target.value);
-            const rawAddress = ElvenJS.storage.get('address');
-            const addressString = typeof rawAddress === 'object' && rawAddress?.address
-                                 ? rawAddress.address
-                                 : (typeof rawAddress === 'string' ? rawAddress : '');
-            if (addressString.startsWith('erd1') && addressString.length === 62) {
-                await fetchWalletData(addressString);
-            }
-        });
-      } else {
-        translatePage('en');
-      }
-
-      const hideStatus = () => {
-        document.querySelectorAll('.status-container').forEach(container => {
-            container.innerHTML = '';
-        });
-      };
-
-      const showStatus = (targetType, messageKey, type = 'loading', errorDetails = '') => {
-        hideStatus();
-
-        const targetContainer = document.querySelector(`.status-container[data-status-for="${targetType}"]`);
-        if (!targetContainer) {
-            console.error(`Status container for "${targetType}" not found.`);
-            return;
-        }
-
-        const currentLang = languageSelector ? languageSelector.value : 'en';
-        let message = (translations[currentLang]?.[messageKey] || translations.en[messageKey] || messageKey).toString();
-        if (type === 'error' && errorDetails) {
-            message += `: ${errorDetails}`;
-        }
-
-        const statusDiv = document.createElement('div');
-        statusDiv.className = `status-message status-${type}`;
-        statusDiv.textContent = message;
-        targetContainer.appendChild(statusDiv);
-      };
-      
-      const resolveIpfsUrl = (originalUrl) => {
-        if (!originalUrl || typeof originalUrl !== 'string') return '';
-        
-        const reliableGateway = 'https://dweb.link/ipfs/';
-
-        if (originalUrl.startsWith('ipfs://')) {
-            const ipfsHash = originalUrl.replace('ipfs://', '');
-            return `${reliableGateway}${ipfsHash}`;
-        }
-        
-        if (originalUrl.includes('tools.multiversx.com') || originalUrl.includes('media.elrond.com')) {
-            return originalUrl;
-        }
-
-        const ipfsPattern = /\/ipfs\/(Qm[1-9A-Za-z]{44}|bafy[0-9a-zA-Z]{50,})/;
-        const match = originalUrl.match(ipfsPattern);
-
-        if (match && match[1]) {
-            const ipfsHash = match[1];
-            return `${reliableGateway}${ipfsHash}`;
-        }
-
-        if (originalUrl.match(/^(Qm[1-9A-Za-z]{44}|bafy[0-9a-zA-Z]{50,})$/)) {
-            return `${reliableGateway}${originalUrl}`;
-        }
-
-        if (originalUrl.startsWith('http')) {
-            return originalUrl;
-        }
-
-        return ''; 
-      };
-
-    const truncateAddress = (address) => {
-        if (!address || address.length < 12) return address;
-        return `${address.substring(0, 7)}...${address.substring(address.length - 5)}`;
-    };
-
-    const displayData = (address, nfts, tokens, accountData) => {
-        const votePower = nfts.filter(nft => nft.collection === ebudsCollectionId).length;
-        const currentLang = languageSelector ? languageSelector.value : 'en';
-        const t = translations[currentLang] || translations.en;
-        
-        const truncatedAddr = truncateAddress(address);
-        
-        const egldBalanceValue = accountData && accountData.balance ? (parseFloat(accountData.balance) / (10 ** 18)).toFixed(4) : (0).toFixed(4);
-
-        let html = `
-          <h2>${t.wallet_info_title}</h2>
-          <p><strong>${t.address_label}</strong> <a href="https://explorer.multiversx.com/accounts/${address}" target="_blank" rel="noopener noreferrer" title="${address}">${truncatedAddr} ↗</a></p>
-          <p><strong>${t.egld_balance_label}</strong> ${egldBalanceValue} EGLD</p> 
-          <div class="vote-power-card">
-            <strong>🏆 ${t.vote_power_label} ${votePower}</strong>
-            <br><small>${t.vote_power_desc}</small>
-          </div>
-        `;
-
-        html += `<div class="assets-title">${t.assets_title}</div><div class="assets-grid">`;
-
-        const allTokensForDisplay = [];
-        const fixedTokensOrder = ['EBUD-d29cce', 'LUV-310136', 'GREEN-1c62ca', 'HIT-3f109b'];
-
-        fixedTokensOrder.forEach(fixedId => {
-            let tokenInfo = tokens.find(t => t.identifier === fixedId);
-            
-            if (fixedId === 'EBUD-d29cce') {
-                allTokensForDisplay.push({
-                    identifier: fixedId,
-                    name: t.ebud_token_label,
-                    balance: tokenInfo ? tokenInfo.balance : '0',
-                    decimals: tokenInfo ? tokenInfo.decimals : 0,
-                    assets: {
-                        svgUrl: 'https://tools.multiversx.com/assets-cdn/tokens/EBUD-d29cce/icon.svg'
-                    },
-                    iconType: 'home'
-                });
-            } else if (tokenInfo) {
-                allTokensForDisplay.push({
-                    identifier: fixedId,
-                    name: fixedId === 'LUV-310136' ? t.luv_token_label : (fixedId === 'GREEN-1c62ca' ? t.green_token_label : t.hit_token_label),
-                    balance: tokenInfo.balance,
-                    decimals: tokenInfo.decimals,
-                    assets: tokenInfo.assets,
-                    iconType: 'favorite'
-                });
-            }
-        });
-        const remainingTokens = tokens.filter(token =>
-            token.identifier !== 'EGLD' && !fixedTokensOrder.includes(token.identifier) && parseFloat(token.balance) / (10 ** (token.decimals || 0)) > 0
-        ).sort((a, b) => (a.name || a.identifier).localeCompare(b.name || b.identifier));
-
-        remainingTokens.forEach(token => allTokensForDisplay.push(token));
-
-
-        if (allTokensForDisplay.length > 0) {
-            html += `<div class="asset-column"><h4>${t.tokens_section_title}</h4><ul class="token-list">`;
-            allTokensForDisplay.forEach(token => {
-                const logoUrl = resolveIpfsUrl(token.assets?.svgUrl || token.assets?.pngUrl || '');
-                
-                let specialIcon = '';
-                if (token.iconType === 'home') {
-                    specialIcon = '<span class="home-icon">🏠</span>';
-                } else if (token.iconType === 'favorite') {
-                    specialIcon = '<span class="favorite-icon">⭐</span>';
-                }
-
-                html += `<li>
-                            <div class="asset-logo-container">
-                                <img src="${logoUrl || 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='}"
-                                     class="asset-logo" alt="${token.name || token.identifier}"
-                                     onerror="this.parentElement.innerHTML = '<div class=&quot;asset-placeholder-logo&quot;>${(token.name || token.identifier).substring(0, 2).toUpperCase()}</div>';">
-                            </div>
-                            <div class="asset-info">
-                                <div class="asset-name">
-                                    <a href="https://explorer.multiversx.com/tokens/${token.identifier}" target="_blank" rel="noopener noreferrer">${token.name || token.identifier} ↗</a>
-                                    ${specialIcon}
-                                </div>
-                                <div class="asset-balance">
-                                    <span>${(token.balance / (10 ** (token.decimals || 0))).toFixed(token.decimals > 4 ? 4 : token.decimals || 0)}</span>
-                                </div>
-                            </div>
-                        </li>`;
-            });
-            html += `</ul></div>`;
-        } else {
-            html += `<div class="asset-column"><h4>${t.tokens_section_title}</h4><p>${t.no_tokens_message}</p></div>`;
-        }
-        
-        const userNftsByCollection = {};
-        nfts.forEach(nft => {
-            const col = nft.collection;
-            if (!userNftsByCollection[col]) {
-                userNftsByCollection[col] = {
-                    collectionId: col,
-                    collectionName: nft.name?.split('-')[0].trim() || col,
-                    count: 0,
-                    logoUrl: resolveIpfsUrl(nft.media?.[0]?.url || nft.url)
-                };
-            }
-            userNftsByCollection[col].count++;
-        });
-
-        const allCollections = Object.values(userNftsByCollection);
-        const budIndex = allCollections.findIndex(c => c.collectionId === ebudsCollectionId);
-        let allNftsForDisplay = [];
-
-        if (budIndex > -1) {
-            const budCollection = allCollections.splice(budIndex, 1)[0];
-            budCollection.count = votePower;
-            allNftsForDisplay.push({
-                ...budCollection,
-                collectionName: t.bud_collection_label,
-                iconType: 'home'
-            });
-        }
-        
-        allCollections.sort((a,b) => a.collectionName.localeCompare(b.collectionName));
-        allNftsForDisplay.push(...allCollections);
-
-
-        if (allNftsForDisplay.length > 0) {
-            html += `<div class="asset-column"><h4>${t.nfts_section_title}</h4><ul class="nft-collections-list">`;
-            allNftsForDisplay.forEach(col => {
-                const logo = col.logoUrl;
-                const sanitizedCollectionId = col.collectionId.replace(/[^a-zA-Z0-9]/g, '');
-                
-                let specialIcon = '';
-                if (col.iconType === 'home') {
-                    specialIcon = '<span class="home-icon">🏠</span>';
-                }
-
-                html += `<li>
-                            <div class="asset-logo-container">
-                                <img src="${logo || 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='}"
-                                     class="asset-logo" alt="${col.collectionName}"
-                                     onerror="this.parentElement.innerHTML = \`<div class='asset-placeholder-logo'>${col.collectionName.substring(0, 2).toUpperCase()}</div>\`;">
-                            </div>
-                            <div class="asset-info">
-                                <div class="asset-name" id="nft-name-${sanitizedCollectionId}">
-                                    <a href="https://explorer.multiversx.com/collections/${col.collectionId}" target="_blank" rel="noopener noreferrer">${col.collectionName} ↗</a>
-                                    ${specialIcon}
-                                </div>
-                                <div class="asset-balance">
-                                    <span>${col.count} NFT${col.count !== 1 ? 's' : ''}</span>
-                                </div>
-                            </div>
-                        </li>`;
-            });
-            html += `</ul></div>`;
-        } else {
-            html += `<div class="asset-column"><h4>${t.nfts_section_title}</h4><p>${t.no_other_nfts_message}</p></div>`;
-        }
-
-        html += `</div>`; 
-
-        walletDetails.innerHTML = html;
-      };
-
-      const fetchWalletData = async (address) => {
-        showStatus('wallet-load', 'loading_wallet_data');
-
-        try {
-          if (!address || typeof address !== 'string' || !address.startsWith('erd1') || address.length !== 62) {
-            throw new Error(translations[languageSelector.value]?.invalid_address || translations.en.invalid_address);
-          }
-          
-          const fullApiUrl = `${proxyUrl}${restApiBase}`;
-
-          const [accountRes, tokensRes, nftsRes] = await Promise.all([
-            fetch(`${fullApiUrl}/accounts/${address}`),
-            fetch(`${fullApiUrl}/accounts/${address}/tokens?size=100`),
-            fetch(`${fullApiUrl}/accounts/${address}/nfts?size=1000`),
-          ]);
-
-          if (!accountRes.ok || !tokensRes.ok || !nftsRes.ok) {
-            throw new Error(translations[languageSelector.value]?.blockchain_error || translations.en.blockchain_error);
-          }
-
-          const accountData = await accountRes.json();
-          const tokensData = await tokensRes.json();
-          const nftsData = await nftsRes.json();
-          
-          const filteredTokens = tokensData.filter(t => parseFloat(t.balance) / (10 ** (t.decimals || 0)) > 0 || t.identifier === 'EGLD');
-          
-          hideStatus();
-          displayData(address, nftsData, filteredTokens, accountData);
-
-        } catch (e) {
-          hideStatus();
-          showStatus('wallet-load', 'blockchain_error', 'error', e.message || 'Unknown Error');
-          if (!isManualConnection) {
-              setTimeout(() => {
-                  showLoginUI();
-              }, 3000);
-          }
-        }
-      };
-      
-      const showLoginUI = () => {
-        connectionOptions.style.display = 'block';
-        walletUI.style.display = 'none';
-        isManualConnection = false;
-        const qrCodeContainer = document.getElementById('qr-code-container');
-        if (qrCodeContainer) {
-            qrCodeContainer.innerHTML = '';
-        }
-        document.querySelector('#disconnectBtnNav').style.display = 'none';
-        hideStatus();
-      };
-
-      const showWalletUI = async (address, manual = false) => {
-        connectionOptions.style.display = 'none';
-        walletUI.style.display = 'block';
-        isManualConnection = manual;
-        const disconnectBtnNav = document.getElementById('disconnectBtnNav');
-        if (disconnectBtnNav) {
-            disconnectBtnNav.textContent = (translations[languageSelector.value] || translations.en)[isManualConnection ? 'back_button' : 'disconnect_button'];
-            disconnectBtnNav.className = isManualConnection ? 'button-connect-wallet' : 'button-connect-wallet disconnect-button';
-            disconnectBtnNav.style.display = 'inline-block';
-        }
-        await fetchWalletData(address);
-      };
-
-      const initElven = async () => {
-        try {
-          await ElvenJS.init({
-            chainType: 'mainnet',
- // Remember to change it. Get yours here: https://cloud.walletconnect.com/sign-in
-            walletConnectV2ProjectId: '<your_wc_project_id_here>',
-            onLoginStart: () => {
-                showStatus(loginTarget, 'connecting_init');
-            },
-            onLoginSuccess: () => {
-              hideStatus();
-              const raw = ElvenJS.storage.get('address');
-              const addressString = typeof raw === 'object' && raw?.address ? raw.address : (typeof raw === 'string' ? raw : '');
-              if (addressString.startsWith('erd1') && addressString.length === 62) {
-                setTimeout(() => showWalletUI(addressString, false), 100);
-              }
-            },
-            onLoginFailure: (error) => {
-                showStatus(loginTarget, 'extension_error', 'error', error.message || 'Unknown Error');
-                setTimeout(hideStatus, 3000);
-            },
-            onQrPending: () => {
-                showStatus('mobile', 'generating_qr');
-            },
-            onQrLoaded: () => {
-                hideStatus();
-            },
-            onLogoutStart: () => {
-                showStatus('wallet-load', 'disconnecting');
-            },
-            onLogoutSuccess: () => {
-                showLoginUI();
-            },
-            onLogoutFailure: (error) => {
-                showStatus('wallet-load', 'disconnect_error', 'error', error || 'Unknown Error');
-                setTimeout(hideStatus, 3000);
-            },
-          });
-        } catch (err) {
-          showStatus('general', 'elven_init_error', 'error', err.message);
-          setTimeout(hideStatus, 3000);
-        }
-      };
-      
-      await initElven();
-
-      const rawAddress = ElvenJS.storage.get('address');
-      const addressString = typeof rawAddress === 'object' && rawAddress?.address
-        ? rawAddress.address
-        : (typeof rawAddress === 'string' ? rawAddress : '');
-
-      if (addressString.startsWith('erd1') && addressString.length === 62) {
-        setTimeout(() => showWalletUI(addressString, false), 100);
-      } else {
-        showLoginUI();
-      }
-
-      document.getElementById('mobileBtn').addEventListener('click', async () => {
-        try {
-            loginTarget = 'mobile';
-            await ElvenJS.login('mobile', { qrCodeContainer: 'qr-code-container' });
-        } catch (error) {
-            showStatus('mobile', 'qr_error', 'error', error.message);
-        }
-      });
-
-      document.getElementById('extensionBtn').addEventListener('click', async () => {
-        try {
-            loginTarget = 'extension';
-            await ElvenJS.login('browser-extension');
-        } catch (error) {
-            showStatus('extension', 'extension_error', 'error', error.message);
-        }
-      });
-
-      document.getElementById('disconnectBtnNav').addEventListener('click', async () => {
-        if (isManualConnection) {
-          showLoginUI(); 
-        } else {
-          const currentAddress = ElvenJS.storage.get('address'); 
-          if (currentAddress) { 
-              await ElvenJS.logout(); 
-          } else {
-              showLoginUI(); 
-          }
-        }
-      });
-
-      document.getElementById('manualAddressBtn').addEventListener('click', async () => {
-        const address = manualAddressInput.value.trim();
-        if (address.startsWith('erd1') && address.length === 62) {
-          await showWalletUI(address, true);
-        } else {
-          showStatus('manual', 'invalid_manual_address', 'error');
-          setTimeout(hideStatus, 3000);
-        }
-      });
-      
-    });
-  </script>
-</body>
-</html>
+        fr: {
+            wallet_page_title: "Portefeuille eBuds",
+            connect_info_title: "Votre Univers Web3",
+            xportal_mobile_title: "📱 xPortal (Mobile)",
+            xportal_mobile_description: "Se connecter via l'application mobile.",
+            generate_qr_button: "Générer QR",
+            browser_extension_title: "🔌 Extension de Navigateur",
+            browser_extension_description: "Utilisez l'extension de navigateur MultiversX.",
+            connect_extension_button: "Connecter Extension",
+            view_address_title: "👁️ Voir l'Adresse",
+            view_address_description: "Entrez manuellement l'adresse du portefeuille pour voir les actifs.",
+            check_address_button: "Vérifier l'Adresse",
+            disconnect_button: "Déconnecter",
+            back_button: "Retour",
+            back_to_main_site: "← Retour au Site Principal",
+            wallet_info_title: "Informations du Portefeuille",
+            address_label: "Adresse :",
+            egld_balance_label: "Solde EGLD :",
+            vote_power_label: "Pouvoir de Vote :",
+            vote_power_desc: "(basé sur le nombre de NFTs eBuds détenus)",
+            assets_title: "Actifs dans le Portefeuille",
+            tokens_section_title: "🪙 Tokens",
+            nfts_section_title: "🖼️ Collections NFT",
+            no_tokens_message: "Vous ne détenez aucun token (hors EGLD).",
+            no_other_nfts_message: "Vous ne détenez aucune autre collection NFT.",
+            loading_wallet_data: "Chargement des données du portefeuille...",
+            invalid_address: "Adresse de portefeuille invalide",
+            blockchain_error: "Erreur lors de la récupération des données de la blockchain",
+            elven_init_error: "Erreur lors de l'initialisation d'ElvenJS",
+            generating_qr: "Génération du code QR...",
+            qr_error: "Erreur lors de la génération du code QR",
+            connecting_extension: "Tentative de connexion de l'extension...",
+            extension_error: "Erreur lors de la connexion de l'extension",
+            disconnecting: "Déconnexion...",
+            disconnect_error: "Erreur lors de la déconnexion",
+            invalid_manual_address: "L'adresse saisie n'est pas valide.",
+            connecting_init: "Initialisation de la connexion...",
+            ebud_token_label: "Token EBUD",
+            luv_token_label: "Token LUV",
+            green_token_label: "Token GREEN",
+            hit_token_label: "Token HIT",
+            bud_collection_label: "Collection eBuds",
+        },
+        it: {
+            wallet_page_title: "Portafoglio eBuds",
+            connect_info_title: "Il Tuo Universo Web3",
+            xportal_mobile_title: "📱 xPortal (Mobile)",
+            xportal_mobile_description: "Connetti tramite l'applicazione mobile.",
+            generate_qr_button: "Genera QR",
+            browser_extension_title: "🔌 Estensione del Browser",
+            browser_extension_description: "Usa l'estensione del browser MultiversX.",
+            connect_extension_button: "Connetti Estensione",
+            view_address_title: "👁️ Visualizza Indirizzo",
+            view_address_description: "Inserisci manualmente l'indirizzo del portafoglio per visualizzare gli asset.",
+            check_address_button: "Verifica Indirizzo",
+            disconnect_button: "Disconnetti",
+            back_button: "Indietro",
+            back_to_main_site: "← Torna al Sito Principale",
+            wallet_info_title: "Informazioni Portafoglio",
+            address_label: "Indirizzo:",
+            egld_balance_label: "Saldo EGLD:",
+            vote_power_label: "Potere di Voto:",
+            vote_power_desc: "(basato sul numero di NFT eBuds posseduti)",
+            assets_title: "Asset nel Portafoglio",
+            tokens_section_title: "🪙 Token",
+            nfts_section_title: "🖼️ Collezioni NFT",
+            no_tokens_message: "Non possiedi alcun token (escluso EGLD).",
+            no_other_nfts_message: "Non possiedi altre collezioni NFT.",
+            loading_wallet_data: "Caricamento dati portafoglio...",
+            invalid_address: "Indirizzo portafoglio non valido",
+            blockchain_error: "Errore nel recupero dati dalla blockchain",
+            elven_init_error: "Errore nell'inizializzazione di ElvenJS",
+            generating_qr: "Generazione codice QR...",
+            qr_error: "Errore nella generazione del codice QR",
+            connecting_extension: "Tentativo di connessione estensione...",
+            extension_error: "Errore nella connessione dell'estensione",
+            disconnecting: "Disconnessione...",
+            disconnect_error: "Errore nella disconnessione",
+            invalid_manual_address: "L'indirizzo inserito non è valido.",
+            connecting_init: "Inizializzazione connessione...",
+            ebud_token_label: "Token EBUD",
+            luv_token_label: "Token LUV",
+            green_token_label: "Token GREEN",
+            hit_token_label: "Token HIT",
+            bud_collection_label: "Collezione eBuds",
+        },
+        ja: {
+            wallet_page_title: "eBuds ウォレット",
+            connect_info_title: "あなたのWeb3ユニバース",
+            xportal_mobile_title: "📱 xPortal (モバイル)",
+            xportal_mobile_description: "モバイルアプリケーション経由で接続。",
+            generate_qr_button: "QR生成",
+            browser_extension_title: "🔌 ブラウザ拡張機能",
+            browser_extension_description: "MultiversXブラウザ拡張機能を使用。",
+            connect_extension_button: "拡張機能を接続",
+            view_address_title: "👁️ アドレス表示",
+            view_address_description: "ウォレットアドレスを手動で入力してアセットを表示。",
+            check_address_button: "アドレス確認",
+            disconnect_button: "切断",
+            back_button: "戻る",
+            back_to_main_site: "← メインサイトに戻る",
+            wallet_info_title: "ウォレット情報",
+            address_label: "アドレス：",
+            egld_balance_label: "EGLD残高：",
+            vote_power_label: "投票権：",
+            vote_power_desc: "（保有するeBuds NFTの数に基づく）",
+            assets_title: "ウォレット内のアセット",
+            tokens_section_title: "🪙 トークン",
+            nfts_section_title: "🖼️ NFTコレクション",
+            no_tokens_message: "トークンを保有していません（EGLDを除く）。",
+            no_other_nfts_message: "他のNFTコレクションを保有していません。",
+            loading_wallet_data: "ウォレットデータを読み込み中...",
+            invalid_address: "無効なウォレットアドレス",
+            blockchain_error: "ブロックチェーンからのデータ取得エラー",
+            elven_init_error: "ElvenJSの初期化エラー",
+            generating_qr: "QRコードを生成中...",
+            qr_error: "QRコード生成エラー",
+            connecting_extension: "拡張機能の接続を試行中...",
+            extension_error: "拡張機能接続エラー",
+            disconnecting: "切断中...",
+            disconnect_error: "切断エラー",
+            invalid_manual_address: "入力されたアドレスが無効です。",
+            connecting_init: "接続を初期化中...",
+            ebud_token_label: "EBUDトークン",
+            luv_token_label: "LUVトークン",
+            green_token_label: "GREENトークン",
+            hit_token_label: "HITトークン",
+            bud_collection_label: "eBudsコレクション",
+        },
+        ko: {
+            wallet_page_title: "eBuds 지갑",
+            connect_info_title: "당신의 Web3 유니버스",
+            xportal_mobile_title: "📱 xPortal (모바일)",
+            xportal_mobile_description: "모바일 애플리케이션을 통해 연결합니다.",
+            generate_qr_button: "QR 생성",
+            browser_extension_title: "🔌 브라우저 확장 프로그램",
+            browser_extension_description: "MultiversX 브라우저 확장 프로그램을 사용합니다.",
+            connect_extension_button: "확장 프로그램 연결",
+            view_address_title: "👁️ 주소 보기",
+            view_address_description: "지갑 주소를 수동으로 입력하여 자산을 확인합니다.",
+            check_address_button: "주소 확인",
+            disconnect_button: "연결 해제",
+            back_button: "뒤로",
+            back_to_main_site: "← 메인
